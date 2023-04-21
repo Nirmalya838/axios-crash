@@ -1,44 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <title>Axios Crash Course</title>
-  </head>
-  <body>
-    <div class="container my-5">
-      <div class="text-center">
-        <h1 class="display-4 text-center mb-3">Axios Crash Course</h1>
-        <button class="btn btn-primary my-3" id="get">GET</button>
-        <button class="btn btn-info" id="post">POST</button>
-        <button class="btn btn-warning" id="update">PUT/PATCH</button>
-        <button class="btn btn-danger" id="delete">DELETE</button>
-        <button class="btn btn-secondary" id="sim">Sim Requests</button>
-        <button class="btn btn-secondary" id="headers">
-          Custom Headers
-        </button>
-        <button class="btn btn-secondary" id="transform">
-          Transform
-        </button>
-        <button class="btn btn-secondary" id="error">
-          Error Handling
-        </button>
-        <button class="btn btn-secondary" id="cancel">
-          Cancel
-        </button>
-      </div>
-      <hr />
-      <div id="res"></div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-    <script src="main.js"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOokingly</title>
+    <link rel="icon" type="image/x-icon" href="BOokingly_img\favicon.ico">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <h1 class="heading">Book Your Room </h1> <hr>
+    <p class="heading">Enjoy Your best <b>comfort</b> with us</p>
+    <form action="thank.html" class="format" onsubmit="savedata(event)">
+        <Label class="lab">Name:</Label> <br>
+        <input type="text" placeholder="First" name="fname" class="detail" required>
+        <input type="text" placeholder="Last" name="lname" class="detail" required> <br><br>
+        <Label class="lab">Permanent Address:</Label> <br>
+        <input type="text" placeholder="Street Address" name="add" class="detail" required>
+        <input type="text" placeholder="City" name="city" class="detail" required> <br><br>
+        <input type="text" placeholder="State" name="state" class="detail" required>
+        <input type="text" placeholder="Pincode" name="pin" class="detail" required><br><br>
+        <label class="lab">Phone</label> <br>
+        <input type="phone" placeholder="##### #####" name="ph" class="id"> <br><br>
+        <label for="" class="lab">Date:</label><br>
+        <input type="date" name="date" class="id"> <br><br>
+        <input type="submit" class="butt" value="Book Now">
+    </form>
+    <ul id="listOfitems"></ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.6/axios.min.js"></script>
+    <script src="dom.js"></script>
+    
+</body>
 </html>
