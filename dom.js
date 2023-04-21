@@ -32,7 +32,7 @@ function savedata(event)
 
         axios.post("https://crudcrud.com/api/eab0b5aec660402f9149fb8096fefebe/Data",cli)
         .then((response)=>{
-            //showuser(response.data)
+            showuser(response.data)
             console.log(response)
         })
         .catch((err)=>{
@@ -45,7 +45,7 @@ function savedata(event)
     // localStorage.setItem(firstname, res)
     // console.log(localStorage)
     showuser(cli)
-
+    }
     function showuser(cli)
     {   
         let parentElem= document.getElementById("listOfitems");
@@ -73,4 +73,23 @@ function savedata(event)
         childElem.appendChild(editbutton)
         parentElem.appendChild(childElem)
     }
-}
+
+
+window.addEventListener("DOMContentLoaded", () => {
+    axios.get("https://crudcrud.com/api/eab0b5aec660402f9149fb8096fefebe/Data")
+        .then((response) => {
+            console.log(response)
+            for (let i = 0; i < response.data.length; i++) {
+                showuser(response.data[i]);
+               
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+});
+
+
+
+
+
