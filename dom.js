@@ -10,15 +10,6 @@ function savedata(event)
     let phone = event.target.ph.value;
     let date = event.target.date.value;
 
-    // localStorage.setItem("Firstname", firstname);
-    // localStorage.setItem("Lastname", lastname);
-    // localStorage.setItem("Address", address);
-    // localStorage.setItem("City", city);
-    // localStorage.setItem("State", state);
-    // localStorage.setItem("Pincode", pincode);
-    // localStorage.setItem("Phone", phone);
-    // localStorage.setItem("Date", date);
-
     let cli ={
         firstname,
         lastname,
@@ -30,7 +21,7 @@ function savedata(event)
         date
     }
 
-        axios.post("https://crudcrud.com/api/cb75dd04e73042349200f7002a283b56/Data",cli)
+        axios.post("https://crudcrud.com/api/4a068296960e4ed88fc2886095e0f964/Data",cli)
         .then((response)=>{
             //showuser(response.data)
         })
@@ -66,9 +57,7 @@ function savedata(event)
         editbutton.type = "button";
         editbutton.value = "Edit";
         editbutton.onclick = () => {
-            localStorage.removeItem(cli.phone)
-            parentElem.removeChild(childElem)
-            document.getElementById("phoneInputTag").value = cli.phone
+                editUser(cli._id);
         }
         
         childElem.appendChild(deletebutton)
@@ -78,7 +67,7 @@ function savedata(event)
 
 
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/cb75dd04e73042349200f7002a283b56/Data")
+    axios.get("https://crudcrud.com/api/4a068296960e4ed88fc2886095e0f964/Data")
         .then((response) => {
             console.log(response)
             for (let i = 0; i < response.data.length; i++) {
@@ -96,7 +85,7 @@ function deleteUser(userId)
 {
     let parentElem = document.getElementById("listOfitems");
     let childElem = document.getElementById(userId);
-    axios.delete(`https://crudcrud.com/api/cb75dd04e73042349200f7002a283b56/Data/${userId}`)
+    axios.delete(`https://crudcrud.com/api/4a068296960e4ed88fc2886095e0f964/Data/${userId}`)
         .then(res => {
             parentElem.removeChild(childElem); // Remove the deleted item from the list on the web page
             console.log(res);
@@ -104,4 +93,43 @@ function deleteUser(userId)
         .catch(err => console.error(err));
 }
 
+function editUser(userId) {
+    let parentElem = document.getElementById("listOfitems");
+    let childElem = document.getElementById(userId);
 
+    let firstname = childElem.querySelector(".fname").value;
+    let lastname = childElem.querySelector(".lname").value;
+    let address = childElem.querySelector(".add").value;
+    let city = childElem.querySelector(".city").value;
+    let state = childElem.querySelector(".state").value;
+    let pincode = childElem.querySelector(".pin").value;
+    let phone = childElem.querySelector(".ph").value;
+    let date = childElem.querySelector(".date").value;
+
+    let cli = {
+        firstname,
+        lastname,
+        address,
+        city,
+        state,
+        pincode,
+        phone,
+        date
+    }
+
+    axios.put(`https://crudcrud.com/api/4a068296960e4ed88fc2886095e0f964/Data/${userId}`, cli)
+        .then(res => {
+            childElem.textContent = cli.firstname + "-" + cli.city + "-" + cli.date + "-" + cli.phone ;
+            // Update the displayed user information with edited data
+            childElem.querySelector(".fname").value = cli.firstname;
+            childElem.querySelector(".lname").value = cli.lastname;
+            childElem.querySelector(".add").value = cli.address;
+            childElem.querySelector(".city").value = cli.city;
+            childElem.querySelector(".state").value = cli.state;
+            childElem.querySelector(".pin").value = cli.pincode;
+            childElem.querySelector(".ph").value = cli.phone;
+            childElem.querySelector(".date").value = cli.date;
+            console.log(res);
+        })
+        .catch(err => console.error(err));
+}
