@@ -30,10 +30,9 @@ function savedata(event)
         date
     }
 
-        axios.post("https://crudcrud.com/api/eab0b5aec660402f9149fb8096fefebe/Data",cli)
+        axios.post("https://crudcrud.com/api/cb75dd04e73042349200f7002a283b56/Data",cli)
         .then((response)=>{
-            showuser(response.data)
-            console.log(response)
+            //showuser(response.data)
         })
         .catch((err)=>{
             console.log(err)
@@ -50,6 +49,7 @@ function savedata(event)
     {   
         let parentElem= document.getElementById("listOfitems");
         let childElem = document.createElement("li");
+        childElem.id=cli._id;
         childElem.textContent = cli.firstname + "-" + cli.city + "-" + cli.date + "-" + cli.phone
         parentElem.appendChild(childElem);
         
@@ -57,9 +57,11 @@ function savedata(event)
         deletebutton.type = "button";
         deletebutton.value = "Delete";
         deletebutton.onclick = () => {
-            localStorage.removeItem(cli.email);
-            parentElem.removeChild(childElem);
-        }
+                deleteUser(cli._id); 
+
+            }
+            
+        
         let editbutton = document.createElement("input")
         editbutton.type = "button";
         editbutton.value = "Edit";
@@ -76,7 +78,7 @@ function savedata(event)
 
 
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get("https://crudcrud.com/api/eab0b5aec660402f9149fb8096fefebe/Data")
+    axios.get("https://crudcrud.com/api/cb75dd04e73042349200f7002a283b56/Data")
         .then((response) => {
             console.log(response)
             for (let i = 0; i < response.data.length; i++) {
@@ -90,6 +92,16 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
+function deleteUser(userId) 
+{
+    let parentElem = document.getElementById("listOfitems");
+    let childElem = document.getElementById(userId);
+    axios.delete(`https://crudcrud.com/api/cb75dd04e73042349200f7002a283b56/Data/${userId}`)
+        .then(res => {
+            parentElem.removeChild(childElem); // Remove the deleted item from the list on the web page
+            console.log(res);
+        })
+        .catch(err => console.error(err));
+}
 
 
